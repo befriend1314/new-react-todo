@@ -1,0 +1,132 @@
+.todo-main{
+    margin: 0 auto;
+    width: 700px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.01), 0 10px 30px 0 rgba(0,0,0,.04);
+}
+.todo-top{
+    border-bottom: 1px solid #e6e6e6;
+}
+.todo-top input{
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 60px;
+    font-size: 24px;
+    border: none;
+    outline: none;
+}
+.todo-list{
+    padding: 0 15px;
+    height: 300px;
+    border-bottom: 1px solid #e6e6e6;
+    overflow-y: auto;
+}
+.todo-list li{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #ededed;
+}
+.todo-list li .vsInput{
+    display: none;
+}
+.todo-list li .inputBg{
+    position: relative;
+    display: block;
+    align-self: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #feae1b;
+}
+.todo-list li .inputBg.checked{
+    border-color: #ccc;
+}
+.todo-list li .inputBg.checked:before{
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    margin-left: -5px;
+    margin-top: -5px;
+    background-color: #ccc;
+
+}
+
+.todo-list li .labelWrap{
+    flex: 1;
+    padding-left: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.todo-list li .labelWrap input,
+.todo-list li .labelWrap.editing label{
+    display: none;
+}
+.todo-list li .labelWrap.editing input{
+    display: inline-block;
+    width: 90%;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.todo-list li label.checked{
+    text-decoration: line-through;
+    color: #ccc;
+}
+.todo-list li input{
+    align-self: center;
+}
+.todo-list li .deletedBtn{
+    display: none;
+}
+.todo-list li:hover .deletedBtn:hover{
+    background-color: #fec04e;
+}
+.todo-list li:hover .deletedBtn{
+    display: block;
+    align-self: center;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    background-color: #feae1b;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.todo-bottom{
+    padding: 15px 0;
+    text-align: center;
+}
+.todo-bottom span{
+    display: inline-block;
+    margin: 0 15px;
+    padding: 0 30px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    background-color: #eee;
+    color: #666;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.todo-bottom span:hover{
+    background-color: #f6f6f6;
+}
+.todo-bottom span.active{
+    border-color: #feae1b;
+    background-color: #feae1b;
+    color: #fff;
+}
+.todo-bottom span.active:hover{
+    background-color: #fec04e;
+    border-color: #fec04e;
+}
