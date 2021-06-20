@@ -24,7 +24,6 @@
 }
 .todo-list li{
     display: flex;
-    justify-content: space-between;
     height: 50px;
     line-height: 50px;
     border-bottom: 1px solid #ededed;
@@ -85,6 +84,7 @@
 }
 .todo-list li .deletedBtn{
     display: none;
+    margin-left: auto;
 }
 .todo-list li:hover .deletedBtn:hover{
     background-color: #fec04e;
