@@ -10,7 +10,7 @@ const Todo = () => {
   const [visibility, setVisibility] = useState('all')
   const [count, setCount] = useState()
   const [beforeEditCache, setBeforeEditCache] = useState('')
-  const [editedTodo, seteditedTodo] = useState([])
+  const [editedTodo, seteditedTodo] = useState({})
 
   const addTodo = useCallback(e => {
     if(e.keyCode === 13) {
@@ -50,18 +50,33 @@ const Todo = () => {
     setTodos(tempTodos)
   }
 
-  const handleEditting = useCallback((todo, e) => {
-  }, [])
-
   const editTodo = useCallback((todo, e) => {
     setBeforeEditCache(todo.title)
+    seteditedTodo(todo)
     e.target.parentNode.firstChild.focus()
   }, [])
 
   const doneEdit = useCallback((todo, e) => {
-    console.log(e.target.value.trim());
-  }, [])
+    const title = e.target.value.trim();
+    if(!title) {
+      deleted(todo)
+    } else {
+      const tempTodos = [...todos];
+      tempTodos.map(item => {
+        if(item.id === todo.id) {
+          item.title = e.target.value.trim()
+        }
+      })
+      setTodos(tempTodos);
+    }
+    seteditedTodo({})
+  }, [todos, deleted])
 
+  const handleKeyDown = (todo, e) => {
+    if(e.keyCode === 13) {
+      doneEdit(todo, e);
+    }
+  }
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
@@ -98,20 +113,20 @@ const Todo = () => {
   return (
     <div className="todo">
       <div className="topTodo">
-        <input type="text" onKeyDown={addTodo} />
+        <input type="text" placeholder="请输入内容。。。" onKeyDown={addTodo} />
       </div>
       <div className="todoList">
         <ul>
           {filteredTodos.map(todo => (
             <li key={todo.id} className={todo.completed ? 'completed': ''}>
-              <div>
+              <div className={editedTodo == todo ? 'editing aListBox' : 'aListBox'}>
                 <input
                   type="text"
                   defaultValue={todo.title}
-                  onChange={e => handleEditting(todo, e)}
                   onBlur={e => doneEdit(todo, e)}
+                  onKeyDown={e => handleKeyDown(todo, e)}
                   className="edit" />
-                <input type="checkbox" checked={todo.completed} onChange={() => handleChange(todo)} />
+                <input type="checkbox" className="changeBox" checked={todo.completed} onChange={() => handleChange(todo)} />
                 <span className="title" onDoubleClick={e => editTodo(todo, e)}>{todo.title}</span>
                 <span className="deletedBtn" onClick={() => deleted(todo)}>删除</span>
               </div>
